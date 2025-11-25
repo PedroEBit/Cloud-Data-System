@@ -21,17 +21,9 @@ jobs:
     - name: 📦 Instalar dependências da Azure SDK
       run: pip install azure-storage-blob
 
-    # --- Se estiver usando um Azure Storage Account Real ---
-    # Ajuste o script 'upload_to_azurite.py' para ler a string de conexão de uma variável de ambiente.
-    - name: ⚙️ Configurar String de Conexão (Real Azure Storage)
-      run: |
-        # Substitua a string de conexão no script para usar a Secret do GitHub
-        # AZURITE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
-        sed -i 's|AZURITE_CONNECTION_STRING = .*|AZURITE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")|g' upload_to_azurite.py
-      # O Secret "AZURE_STORAGE_CONNECTION_STRING" deve ser configurado nas Settings do seu repositório.
-
-    - name: ⬆️ Executar Upload do CSV
+    - name: ⬆️ Executar Upload do CSV para Azure Storage Real
+      # O script Python lê AZURE_STORAGE_CONNECTION_STRING da seção 'env'
       env:
         # Passa o secret de forma segura como variável de ambiente
-        AZURE_STORAGE_CONNECTION_STRING: "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}"
-      run: python upload_to_azurite.py
+        AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+      run: python upload_file_to_storage.py
