@@ -1,0 +1,37 @@
+name: Automatic CSV Upload to Azure Storage
+
+on:
+  push:
+    branches:
+      - main  # Gatilho: executa quando há um push para a branch 'main'
+
+jobs:
+  upload-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ⬇️ Checkout do Repositório
+      uses: actions/checkout@v4
+
+    - name: 🐍 Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: 📦 Instalar dependências da Azure SDK
+      run: pip install azure-storage-blob
+
+    # --- Se estiver usando um Azure Storage Account Real ---
+    # Ajuste o script 'upload_to_azurite.py' para ler a string de conexão de uma variável de ambiente.
+    - name: ⚙️ Configurar String de Conexão (Real Azure Storage)
+      run: |
+        # Substitua a string de conexão no script para usar a Secret do GitHub
+        # AZURITE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+        sed -i 's|AZURITE_CONNECTION_STRING = .*|AZURITE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")|g' upload_to_azurite.py
+      # O Secret "AZURE_STORAGE_CONNECTION_STRING" deve ser configurado nas Settings do seu repositório.
+
+    - name: ⬆️ Executar Upload do CSV
+      env:
+        # Passa o secret de forma segura como variável de ambiente
+        AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+      run: python upload_to_azurite.py

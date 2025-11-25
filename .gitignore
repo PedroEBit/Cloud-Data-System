@@ -1,0 +1,67 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Temporary / cache
+*.log
+*.tmp
+*.cache/
+.cache/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# =========================
+# Docker
+# =========================
+# Ignora arquivos criados pelo build
+docker-compose.override.yml
+*.pid
+
+# Azure / Credenciais
+*.env
+.env.*
+secrets.*
+*.key
+*.pem
+
+# =========================
+# CSVs, outputs & data
+# =========================
+*.csv
+*.tsv
+*.xlsx
+
+# Apenas se quiser manter o PI_train.csv:
+# !PI_train.csv
+
+# =========================
+# GitHub
+# =========================
+# Artifacts das Actions
+.github/workflows/*.yaml
+*.DS_Store
+
+# =========================
+# Sistema Operacional
+# =========================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux / macOS
+*.swp
+*.swo
