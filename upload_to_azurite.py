@@ -7,18 +7,19 @@ CONTAINER_NAME = "data-trab"
 
 # String de Conexão do Azurite
 # Esta string é a string de conexão padrão/default para o Azurite (HTTP)
-AZURITE_CONNECTION_STRING = (
-    "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;"
-    "AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtCdLwSjkQk/SUwa effectingCQN0YzWGuxqUgEazBPZXoPHhn/Lp2PS+zrksazssqrqicfA==;"
-    "BlobEndpoint=http://127.0.0.1:10000;QueueEndpoint=http://127.0.0.1:10001;TableEndpoint=http://127.0.0.1:10002;" # Altere o host se não estiver usando 'azurite-container'
-)
+# AZURITE_CONNECTION_STRING = (
+#     "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;"
+#     "AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtCdLwSjkQk/SUwa effectingCQN0YzWGuxqUgEazBPZXoPHhn/Lp2PS+zrksazssqrqicfA==;"
+#     "BlobEndpoint=http://127.0.0.1:10000;QueueEndpoint=http://127.0.0.1:10001;TableEndpoint=http://127.0.0.1:10002;" # Altere o host se não estiver usando 'azurite-container'
+# )
 
 # --- CÓDIGO PARA MIGRAÇÃO (USE ISTO QUANDO FOR PARA A NUVEM) ---
 # Quando estiver pronto para o Azure Real, o script deve ler a string de conexão
 # de uma variável de ambiente (como a AZURE_STORAGE_CONNECTION_STRING, que você 
 # configurará como um Secret no GitHub Actions).
 
-CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING", AZURITE_CONNECTION_STRING)
+CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
+# CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRING", AZURITE_CONNECTION_STRING)
 #
 # Se a variável de ambiente for encontrada (como no GitHub Actions), ela usa a string real.
 # Caso contrário (rodando localmente), ela volta para a string do Azurite.
