@@ -8,12 +8,9 @@ CONTAINER_NAME = "data-trab"
 # String de Conexão do Azurite
 # Esta string é a string de conexão padrão/default para o Azurite (HTTP)
 AZURITE_CONNECTION_STRING = (
-    "DefaultEndpointsProtocol=http;"
-    "AccountName=devstoreaccount1;"
+    "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;"
     "AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtCdLwSjkQk/SUwa effectingCQN0YzWGuxqUgEazBPZXoPHhn/Lp2PS+zrksazssqrqicfA==;"
-    "BlobEndpoint=http://127.0.0.1:10000;"
-    "QueueEndpoint=http://127.0.0.1:10001;"
-    "TableEndpoint=http://127.0.0.1:10002;" # Altere o host se não estiver usando 'azurite-container'
+    "BlobEndpoint=http://127.0.0.1:10000;QueueEndpoint=http://127.0.0.1:10001;TableEndpoint=http://127.0.0.1:10002;" # Altere o host se não estiver usando 'azurite-container'
 )
 
 # --- CÓDIGO PARA MIGRAÇÃO (USE ISTO QUANDO FOR PARA A NUVEM) ---
