@@ -22,6 +22,8 @@ jobs:
       run: pip install azure-storage-blob
 
     - name: ⬆️ Executar Upload do CSV para Azure Storage Real
+
+      working-directory: ${{ github.workspace }}
       # O script Python lê AZURE_STORAGE_CONNECTION_STRING da seção 'env'
       env:
         # Passa o secret de forma segura como variável de ambiente
