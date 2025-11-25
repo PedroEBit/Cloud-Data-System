@@ -38,9 +38,8 @@ secrets.*
 *.pem
 
 # =========================
-# CSVs, outputs & data
+# Outputs & data
 # =========================
-*.csv
 *.tsv
 *.xlsx
 
