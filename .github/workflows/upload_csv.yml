@@ -1,0 +1,35 @@
+name: Upload CSV para Azure
+
+on:
+  push:
+    paths:
+      - '**.csv' 
+
+jobs:
+  enviar-arquivo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+  
+    - name: Verificar tipo de mudança
+      uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          meus_csvs:
+            - added|modified: '**.csv'
+
+    
+    - name: Upload para o Blob Storage
+      if: steps.filter.outputs.meus_csvs == 'true'  
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az storage blob upload-batch \
+            --account-name clouddatasystem2 \
+            --destination meus-csvs \
+            --source . \
+            --connection-string "${{ secrets.AZURE_CONNECTION_STRING }}" \
+            --pattern "*.csv"
